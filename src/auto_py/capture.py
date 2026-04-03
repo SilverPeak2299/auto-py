@@ -41,6 +41,7 @@ def execute_prepared_module(
 ) -> dict[str, object]:
     """Execute compiled module code inside an isolated module namespace."""
     namespace = build_execution_namespace(prepared_module.path)
+    
     with script_runtime_context(prepared_module.path, script_args=script_args):
         exec(prepared_module.code, namespace, namespace)
     return namespace

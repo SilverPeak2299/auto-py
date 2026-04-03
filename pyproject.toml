@@ -15,5 +15,10 @@ dependencies = [
 [project.scripts]
 auto-py = "auto_py.runner:main"
 
+[dependency-groups]
+dev = [
+    "pytest>=8,<9",
+]
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/auto_py"]
