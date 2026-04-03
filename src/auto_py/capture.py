@@ -1,0 +1,2 @@
+"""Failure capture stage placeholder."""
+

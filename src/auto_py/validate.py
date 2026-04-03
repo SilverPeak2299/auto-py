@@ -1,0 +1,2 @@
+"""Validation stage placeholder."""
+
