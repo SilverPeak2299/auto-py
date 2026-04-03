@@ -15,12 +15,32 @@ app = typer.Typer(
 
 def parse_python_file(file_path: Path) -> PreparedModule:
     """Read, parse, and compile a Python file for execution."""
-    return prepare_module(file_path)
+    while True:
+        try:
+            return prepare_module(file_path)
+        except SyntaxError as error:
+            print(f"[SYNTAX ERROR] {error}")
+            print("[RESUME] Fix the file, then type 'r' and press Enter to retry parsing.")
+            wait_for_manual_retry(error)
 
 
 def execute_python_file(prepared_module: PreparedModule) -> None:
     """Execute a prepared Python module."""
     execute_prepared_module(prepared_module)
+
+
+def wait_for_manual_retry(original_error: SyntaxError) -> None:
+    """Block until the user requests another parse attempt."""
+    while True:
+        try:
+            command = input().strip().lower()
+        except EOFError as exc:
+            raise original_error from exc
+
+        if command == "r":
+            return
+
+        print("[RESUME] Waiting for 'r'.")
 
 
 @app.command()
