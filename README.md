@@ -64,7 +64,7 @@ pip install -e .
 
 ## Usage
 
-auto-py script.py
+auto-py run script.py
 
 ---
 
@@ -189,3 +189,4 @@ are welcome.
 ## License
 
 TBD
+auto-py run script.py
