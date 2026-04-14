@@ -137,10 +137,50 @@ src/
 - checkpoint.py — controlled re-execution  
 - validate.py — validation pipeline  
 - repair.py — LLM interaction  
+- llm/ — local-first LLM gateway interfaces  
+- repair_agent/ — checkpoint-aware repair loop scaffold  
 
 examples/
 
 - failing scripts for testing  
+
+docs/
+
+- PRD.md — product requirements  
+- CHECKPOINTING.md — checkpointing and resume design  
+- REPAIR_AGENT_PRD.md — repair agent scope and roadmap  
+
+---
+
+## Local Model Gateway
+
+The repair agent scaffold is designed around local/self-hosted models first.
+
+Default environment:
+
+```text
+AUTO_PY_LLM_BASE_URL=http://localhost:11434/v1
+AUTO_PY_LLM_MODEL=qwen2.5-coder:7b
+AUTO_PY_LLM_API_KEY=
+```
+
+For `pipx` installs, create a user-level config file:
+
+```bash
+auto-py llm-config init
+auto-py llm-config path
+auto-py llm-config show
+```
+
+On macOS, the default config path is:
+
+```text
+~/Library/Application Support/auto-py/config.toml
+```
+
+The gateway uses the OpenAI-compatible chat completions shape so it can point at
+local runtimes such as Ollama, LM Studio, Docker Model Runner, or llama.cpp
+server without changing the repair loop.
 
 ---
 
